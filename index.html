@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .card-header {
+      background: #0a1f44;
+      padding: 32px 40px;
+      text-align: center;
+    }
+
+    .card-header h1 {
+      color: #ffffff;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .card-header p {
+      color: #a8b8d8;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* ── Form body ── */
+    .card-body {
+      padding: 36px 40px 40px;
+    }
+
+    .field {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+    }
+
+    label span.required {
+      color: #c0392b;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #111827;
+      background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      border-color: #0a1f44;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(10,31,68,0.1);
+    }
+
+    textarea { min-height: 130px; }
+
+    /* ── Submit button ── */
+    .btn-submit {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: #c9a84c;
+      color: #0a1f44;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: #b8922e;
+      box-shadow: 0 4px 12px rgba(201,168,76,0.45);
+    }
+
+    .btn-submit:active { transform: scale(0.98); }
+
+    /* ── Success message ── */
+    .success {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: #ecfdf5;
+      border: 1.5px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 20px;
+    }
+
+    .success.visible { display: flex; }
+
+    .success-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: #10b981;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-icon svg { width: 18px; height: 18px; }
+
+    .success-text strong {
+      display: block;
+      color: #065f46;
+      font-size: 0.95rem;
+    }
+
+    .success-text span {
+      color: #047857;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="card-header">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you. Send us a message!</p>
+    </div>
+
+    <div class="card-body">
+      <div class="field">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" placeholder="Jane Smith" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" placeholder="jane@example.com" />
+      </div>
+
+      <div class="field">
+        <label for="message">Message <span class="required">*</span></label>
+        <textarea id="message" placeholder="Write your message here…"></textarea>
+      </div>
+
+      <button class="btn-submit" onclick="handleSubmit()">Submit</button>
+
+      <div class="success" id="successMsg">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="success-text">
+          <strong>Message sent successfully!</strong>
+          <span>Thank you for reaching out — we'll get back to you soon.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handleSubmit() {
+      document.getElementById('successMsg').classList.add('visible');
+      document.querySelector('.btn-submit').textContent = 'Sent ✓';
+      document.querySelector('.btn-submit').style.background = '#10b981';
+      document.querySelector('.btn-submit').style.color = '#fff';
+      document.querySelector('.btn-submit').disabled = true;
+    }
+  </script>
+
+</body>
+</html>
