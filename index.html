@@ -200,13 +200,29 @@
     </div>
   </div>
 
-  <script>
+ <script>
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbwrWlz2KFFZWT5Mz16-m2XEADFGIv96omC2Ob4HK7b3Av9Ba3IMAmOGxvYOW7HP29Rt/exec";
+
     function handleSubmit() {
-      document.getElementById('successMsg').classList.add('visible');
-      document.querySelector('.btn-submit').textContent = 'Sent ✓';
-      document.querySelector('.btn-submit').style.background = '#10b981';
-      document.querySelector('.btn-submit').style.color = '#fff';
-      document.querySelector('.btn-submit').disabled = true;
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      fetch(SHEET_URL, {
+        method: 'POST',
+        body: new URLSearchParams({ Name: name, Email: email, Message: message })
+      })
+      .then(() => {
+        document.getElementById('successMsg').classList.add('visible');
+        document.querySelector('.btn-submit').textContent = 'Sent ✓';
+        document.querySelector('.btn-submit').style.background = '#10b981';
+        document.querySelector('.btn-submit').style.color = '#fff';
+        document.querySelector('.btn-submit').disabled = true;
+      })
+      .catch((error) => {
+        alert('Something went wrong. Please try again.');
+        console.error(error);
+      });
     }
   </script>
 
